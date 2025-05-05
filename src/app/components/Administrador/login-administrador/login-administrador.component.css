@@ -1,0 +1,164 @@
+.login-container {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.p-grid {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* Estilos para la columna izquierda */
+.left-column {
+    flex: 1;
+    background: linear-gradient(135deg, #4527a0, #7b1fa2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.logo-container {
+    text-align: center;
+    max-width: 80%;
+}
+
+.logo-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.logo-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.illustration {
+    margin: 2rem 0;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-icon {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+.admin-icon:before {
+    content: '';
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.admin-icon:after {
+    content: '';
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 50px;
+    border-radius: 50px 50px 0 0;
+    background-color: rgba(255, 255, 255, 0.8);
+}
+
+.welcome-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+/* Estilos para la columna derecha */
+.right-column {
+    flex: 1;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.login-form-container {
+    width: 100%;
+    max-width: 450px;
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-field {
+    margin-bottom: 1rem;
+}
+
+.form-field .p-inputtext-lg,
+.form-field .p-password-lg .p-password-input {
+    width: 100%;
+}
+
+.form-actions {
+    margin-top: 1rem;
+}
+
+.form-actions button {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.loading-indicator {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.message {
+    margin-bottom: 1rem;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .p-grid {
+        flex-direction: column;
+    }
+    
+    .left-column {
+        display: none;
+    }
+    
+    .right-column {
+        padding: 1rem;
+    }
+    
+    .login-form-container {
+        box-shadow: none;
+        padding: 1rem;
+    }
+}

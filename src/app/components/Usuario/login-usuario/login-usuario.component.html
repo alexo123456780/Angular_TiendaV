@@ -1,0 +1,99 @@
+<div class="container-global">
+    <div class="form-container">
+      <div class="login-card">
+        <div class="card-header">
+          <i class="pi pi-user-circle"></i>
+          <h2 class="titulo">Login Usuario</h2>
+          <p class="parrafo">Logeate y vive la experiencia</p>
+        </div>
+  
+        <form [formGroup]="formulario" (ngSubmit)="logearse()">
+          <!-- Fixed Email Input -->
+          <div class="form-field">
+            <div class="input-wrapper">
+              <i class="pi pi-envelope input-icon"></i>
+              <input 
+                pInputText 
+                formControlName="email" 
+                placeholder="Correo Electrónico" 
+                class="p-inputtext p-component full-width-input"
+              />
+            </div>
+  
+            <div class="validation-messages" *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched">
+              <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('email')?.errors?.['required']">
+                El Correo es requerido
+              </p-message>
+              <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('email')?.errors?.['email']">
+                Debes de ingresar una direccion de correo correcta
+              </p-message>
+            </div>
+          </div>
+  
+          <!-- Password Input -->
+          <div class="form-field">
+            <div class="input-wrapper">
+              <p-password 
+                formControlName="password" 
+                [toggleMask]="true" 
+                [feedback]="false"
+                placeholder="Password"
+                styleClass="full-width-input"
+              ></p-password>
+            </div>
+  
+            <div class="validation-messages" *ngIf="formulario.get('password')?.invalid && formulario.get('password')?.touched">
+              <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('password')?.errors?.['required']">
+                El Password es requerido
+              </p-message>
+              <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('password')?.errors?.['minlength']">
+                Ingresa minimo 4 caracteres
+              </p-message>
+              <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('password')?.errors?.['maxlength']">
+                Ingresa maximo 20 caracteres
+              </p-message>
+            </div>
+          </div>
+  
+          <div class="button-container">
+            <p-button 
+              type="submit" 
+              [disabled]="estaCargando || formulario.invalid" 
+              styleClass="login-button"
+              icon="pi pi-sign-in"
+              iconPos="right"
+              label="Login"
+            ></p-button>
+            
+            <div class="spinner-container" *ngIf="estaCargando">
+              <p-progressSpinner strokeWidth="8" fill="transparent" animationDuration=".5s" />
+            </div>
+          </div>
+        </form>
+  
+        <div class="message-container">
+          <p-message severity="success" icon="pi pi-check-circle" *ngIf="mensajeExito" [text]="mensajeExito"></p-message>
+          <p-message severity="error" icon="pi pi-times-circle" *ngIf="mensajeError" [text]="mensajeError"></p-message>
+        </div>
+        
+        <div class="additional-options">
+          <a href="#" class="forgot-password">
+            <i class="pi pi-question-circle"></i>
+            ¿Olvidaste tu contraseña?
+          </a>
+          <a routerLink="/registro/usuario" class="create-account">
+            <i class="pi pi-user-plus"></i>
+            Crear cuenta
+          </a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="banner-container">
+      <div class="banner-content">
+        <i class="pi pi-shield" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+        <h1>Bienvenido de vuelta</h1>
+        <p>Accede a tu cuenta para disfrutar de todos nuestros servicios</p>
+      </div>
+    </div>
+  </div>

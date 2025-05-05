@@ -1,0 +1,211 @@
+<div class="min-h-screen h-screen w-screen flex items-center justify-center p-0 m-0 overflow-hidden">
+
+  <div class="w-full h-full flex bg-white/95 backdrop-blur-sm overflow-hidden relative">
+    <div class="absolute inset-0 bg-white/95 backdrop-blur-sm z-0"></div>
+    
+    <div class="w-1/2 p-8 md:p-16 flex items-center justify-center relative z-10">
+      <div class="flex flex-col justify-center max-w-md w-full">
+        <div class="mb-8">
+          <h2 class="text-3xl font-bold text-gray-800 mb-2 animate-[fadeInDown_0.6s_ease-out] flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+            </svg>
+            Registro Usuario
+          </h2>
+          <p class="text-gray-600 animate-[fadeInUp_0.7s_ease-out]">Registrate hoy y descuebre una variedad de productos</p>
+        </div>
+
+        <form [formGroup]="formularioRegistro" (ngSubmit)="enviarRegistro()">
+
+          <div class="input-container">
+            <i class="pi pi-user input-icon"></i>
+            <input type="text" pInputText placeholder="Nombre completo"
+            formControlName="nombre_usuario"
+            >
+          </div>
+
+          <div class="input-container" *ngIf="formularioRegistro.get('nombre_usuario')?.invalid && formularioRegistro.get('nombre_usuario')?.touched">
+
+            <p-message severity="error" variant="simple" size="small" *ngIf="formularioRegistro.get('nombre_usuario')?.errors?.['required']">
+                El nombre es requerido
+
+            </p-message>
+
+          
+            <p-message severity="error" variant="simple" size="small" *ngIf="formularioRegistro.get('nombre_usuario')?.errors?.['maxlength']">
+                El nombre debe tener 255 caracteres
+
+            </p-message>
+          </div>
+
+
+          <div class="input-container">
+            <i class="pi pi-user input-icon"></i>
+            <input type="text" pInputText placeholder="Apellido Paterno (Opcional)"
+            formControlName="apellido_paterno"
+            >
+          </div>
+
+          <div class="input-container">
+            <i class="pi pi-user input-icon"></i>
+            <input type="text" pInputText placeholder="Apellido Materno (Opcional)"
+            formControlName="apellido_materno"
+            >
+          </div>
+
+          <div class="input-container">
+            <i class="pi pi-phone input-icon"></i>
+            <input type="text" pInputText placeholder="Telefono"
+            formControlName="numero_telefonico"
+            >
+          </div>
+
+          <div class="input-container" *ngIf="formularioRegistro.get('numero_telefonico')?.invalid && formularioRegistro.get('numero_telefonico')?.touched">
+
+            <p-message severity="error" variant="simple" size="small" *ngIf="formularioRegistro.get('numero_telefonico')?.errors?.['required']">
+                El numero telefonico es obligatorio
+
+            </p-message>
+
+
+            <p-message severity="error" variant="simple" size="small" *ngIf="formularioRegistro.get('numero_telefonico')?.errors?.['maxlength']">
+                El numero telefonico es de solo 10 digitos
+
+            </p-message>            
+          </div>
+
+
+          <div class="input-container">
+            <i class="pi pi-warehouse input-icon"></i>
+            <input type="text" pInputText placeholder="Direccion"
+            formControlName="direccion"
+            >
+          </div>
+
+          <div class="input-container" *ngIf="formularioRegistro.get('direccion')?.invalid && formularioRegistro.get('direccion')?.touched">
+
+            <p-message severity="error" variant="simple" size="small" *ngIf="formularioRegistro.get('direccion')?.errors?.['required']">
+                La direccion es obligatoria
+
+            </p-message>
+   
+          </div>
+
+
+          <div class="input-container">
+            <i class="pi pi-envelope input-icon"></i>
+            <input type="email" pInputText placeholder="Correo electrónico"
+            formControlName="email"
+            >
+          </div>
+
+          <div class="input-container" *ngIf="formularioRegistro.get('email')?.invalid && formularioRegistro.get('email')?.touched">
+
+            <p-message severity="error" variant="simple" size="small" *ngIf="formularioRegistro.get('email')?.errors?.['required']">
+                El correo es obligatorio
+
+            </p-message>
+
+            <p-message severity="error" variant="simple" size="small" *ngIf="formularioRegistro.get('email')?.errors?.['email']">
+                El correo debe ser con direccion correcta
+
+            </p-message>
+   
+          </div>
+          
+          <div class="input-container">
+            <i class="pi pi-lock input-icon"></i>
+            <p-password placeholder="Contraseña" [toggleMask]="true" styleClass="w-full"
+            formControlName="password"
+            ></p-password>
+          </div>
+
+          <div class="input-container" *ngIf="formularioRegistro.get('password')?.invalid && formularioRegistro.get('password')?.touched">
+
+            <p-message severity="error" variant="simple" size="small" *ngIf="formularioRegistro.get('password')?.errors?.['required']">
+                El password es obligatorio
+
+            </p-message>
+
+            <p-message severity="error" variant="simple" size="small" *ngIf="formularioRegistro.get('password')?.errors?.['minlength']">
+                El password es minimo de 4 caracteres
+
+            </p-message>
+
+            <p-message severity="error" variant="simple" size="small" *ngIf="formularioRegistro.get('password')?.errors?.['maxlength']">
+                El password es de maximo 20 caracteres
+            </p-message>
+   
+          </div>
+
+
+          <div class="space-y-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">Imagen de Perfil</label>
+            <div class="flex items-center space-x-4">
+              <div class="relative">
+                <div class="h-24 w-24 rounded-full overflow-hidden bg-gray-100 border-2 border-teal-300 flex items-center justify-center">
+                  <img *ngIf="imagenPreview" [src]="imagenPreview" alt="Vista previa" class="h-full w-full object-cover">
+                  <svg *ngIf="!imagenPreview" xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="flex-1">
+                <label for="perfil_maestro" class="cursor-pointer inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 transition-all duration-300">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  Seleccionar imagen
+                </label>
+                <input id="perfil_maestro" type="file" accept="image/*" (change)="seleccionarImagen($event)" class="sr-only" />
+                <p class="mt-1 text-xs text-gray-500">JPG, PNG o JPEG </p>
+              </div>
+            </div>
+          </div>
+        
+          
+          <div class="card flex justify-center" *ngIf="estaCargando">
+            <p-progress-spinner strokeWidth="8" fill="transparent" animationDuration=".5s" [style]="{ width: '50px', height: '50px' }" />
+        </div>
+          
+         
+          <button type="submit">
+            Enviar
+        </button>
+
+
+        <div class="h-16 my-4">
+          <div class="text-sm text-red-500 bg-red-50 p-3 rounded-lg border border-red-200 animate-[fadeInUp_0.5s_ease-in-out] flex items-center gap-3" *ngIf="mensajeError">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+            </svg>
+            {{ mensajeError }}
+          </div>
+          <div class="text-sm text-green-600 bg-green-50 p-3 rounded-lg border border-green-200 animate-[fadeInUp_0.5s_ease-in-out] flex items-center gap-3" *ngIf="mensajeExito">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            {{ mensajeExito }}
+          </div>
+        </div>
+
+        </form>
+
+      </div>
+    </div>
+    
+    <div class="w-1/2 bg-gradient-to-br from-blue-400 via-purple-500 to-indigo-400 p-8 md:p-16 flex items-center justify-center relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-br from-blue-400/30 via-purple-500/30 to-indigo-400/30 backdrop-blur-sm"></div>
+      
+      <div class="absolute top-1/4 left-1/4 w-16 h-16 bg-white/20 rounded-full blur-xl animate-[pulse_4s_ease-in-out_infinite]"></div>
+      <div class="absolute bottom-1/3 right-1/3 w-24 h-24 bg-white/20 rounded-full blur-xl animate-[pulse_6s_ease-in-out_infinite_1s]"></div>
+      
+      <div class="text-white text-center relative z-10">
+        <div class="mt-8 flex justify-center">
+
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
