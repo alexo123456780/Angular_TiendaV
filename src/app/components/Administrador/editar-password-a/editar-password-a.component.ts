@@ -133,12 +133,9 @@ export class EditarPasswordAComponent implements OnInit{
 
   }
 
-
   rutaDashboard():void{
 
     this.router.navigate(['/dashboard/admin'])
-
-
   }
 
 

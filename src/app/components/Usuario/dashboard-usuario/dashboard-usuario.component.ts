@@ -4,8 +4,10 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ProductoServiceService } from '../../../services/producto-service.service';
 import { CategoriaServiceService } from '../../../services/categoria-service.service';
+import { UsuarioServiceService } from '../../../services/usuario-service.service';
 import { Producto } from '../../../interfaces/Producto';
 import { Categoria } from '../../../interfaces/Categoria';
+import { Usuario } from '../../../interfaces/Usuario';
 import { Router } from '@angular/router';
 
 @Component({
@@ -27,13 +29,20 @@ export class DashboardUsuarioComponent implements OnInit {
   productosFiltrados : Producto[] = [];
   busqueda: string = '';
   categoriaSeleccionada : number | null = null;
+  usuario: Usuario | null = null;
+  id_usuario: number | null = null;
 
-  constructor(private productoService:ProductoServiceService, private categoriaService:CategoriaServiceService, private router: Router){}
+  constructor(private productoService:ProductoServiceService, private categoriaService:CategoriaServiceService, private router: Router,
+    private usuarioService:UsuarioServiceService
+
+  ){}
 
   ngOnInit(): void {
     
+    this.obtenerIdUsuario()
     this.obtenerProductos();
     this.obtenerCategorias();
+    
     
   }
 
@@ -44,6 +53,15 @@ export class DashboardUsuarioComponent implements OnInit {
     if(this.mensajeError)  setTimeout(() => {this.mensajeError = ''},1400);
 
   }
+
+  obtenerIdUsuario():void{
+
+    this.id_usuario = this.usuarioService.obtenerIdUsuario();
+    this.obtenerInfoUsuario();
+
+  }
+
+
 
   obtenerProductos():void{
 
@@ -109,6 +127,40 @@ export class DashboardUsuarioComponent implements OnInit {
   }
 
 
+  obtenerInfoUsuario():void{
+
+    if(this.id_usuario){
+
+      this.usuarioService.obtenerInfoUsuario(this.id_usuario).subscribe({
+
+        next : (response) =>{
+
+          if(response.data && response.data !== undefined){
+
+            this.usuario = response.data;
+            console.log(this.usuario);
+
+          }else{
+
+            console.log('Error al obtener la informacion del usuario');
+          }
+
+        },
+
+        error : (error) =>{
+
+          console.log(JSON.stringify(error,null,3));
+        }
+
+      })
+    }
+
+  }
+
+
+
+
+
   metodoBusqueda(event: Event):void{
 
     const inputBusqueda = (event.target as HTMLInputElement)?.value;
@@ -164,6 +216,10 @@ export class DashboardUsuarioComponent implements OnInit {
     this.router.navigate(['/login/usuario'])
 
   }
+
+
+
+
 
 
 

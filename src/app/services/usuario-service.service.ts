@@ -81,6 +81,44 @@ export class UsuarioServiceService {
     )
   }
 
+  obtenerInfoUsuario(id_usuario:number):Observable<UsuarioResponse>{
+
+    return this.http.get<UsuarioResponse>(`${this.apiUrl}/ver_info_usuario/${id_usuario}`).pipe(
+
+      map(response =>{
+
+        console.log(JSON.stringify({status:response.status, message: response.message, code:response.code},null,3));
+
+        return response;
+
+      })
+    )
+
+  }
+
+
+  obtenerIdUsuario(): number | null{
+
+    const usuarioInfo = localStorage.getItem('data_usuarios');
+
+    if(usuarioInfo){
+
+      const infoJson = JSON.parse(usuarioInfo);
+
+      if(infoJson && typeof infoJson.id === 'number'){
+
+        return Number(infoJson.id);
+      }
+
+      return null;
+    }
+
+    return null;
+
+  }
+
+
+
 
 
 

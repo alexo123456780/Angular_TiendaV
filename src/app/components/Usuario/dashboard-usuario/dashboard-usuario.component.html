@@ -1,5 +1,4 @@
 <div class="bg-gradient-to-br from-amber-50 via-white to-amber-50 rounded-xl p-6">
-    <!-- Header -->
     <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
       <div class="flex items-center">
         <div class="bg-gradient-to-r from-amber-500 to-orange-500 text-white p-2 rounded-lg mr-2">
@@ -26,7 +25,6 @@
       </div>
   
       <div class="flex items-center gap-4">
-        <!-- Perfil de Usuario -->
         <div class="relative group">
           <button class="inline-flex items-center justify-center text-amber-600 px-4 py-2 rounded-md">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5 mr-2">
@@ -35,7 +33,6 @@
             </svg>
             Mi Cuenta
           </button>
-          <!-- Menú desplegable -->
           <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg overflow-hidden z-30 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
             <div class="py-2">
               <a class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-amber-50 cursor-pointer">
@@ -101,7 +98,6 @@
       </div>
     </div>
   
-    <!-- Hero Banner -->
     <div class="mb-8" *ngIf="productos">
       <div class="relative overflow-hidden rounded-xl">
         <div class="absolute inset-0 bg-gradient-to-r from-amber-500/90 to-orange-500/80 z-10"></div>
@@ -121,11 +117,9 @@
       </div>
     </div>
   
-    <!-- Categories -->
     <div class="mb-8">
       <h3 class="text-lg font-semibold text-gray-800 mb-4">Explora por Categoría</h3>
       <div class="flex overflow-x-auto gap-4 pb-2 scrollbar-hide">
-        <!-- Aquí podrías usar *ngFor="let category of categories; let i = index" -->
         <div class="flex-shrink-0 rounded-lg p-3 cursor-pointer transition-colors bg-gradient-to-r from-amber-500 to-orange-500 text-white" *ngFor="let categoria of categorias">
           <span class="font-medium whitespace-nowrap">{{categoria.nombre}}</span>
         </div>
@@ -134,7 +128,6 @@
         </div>
     </div>
   
-    <!-- Products -->
     <div>
       <div class="flex justify-between items-center mb-4">
         <h3 class="text-xl font-bold text-gray-800">Productos Destacados</h3>
@@ -142,9 +135,7 @@
       </div>
   
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        <!-- Aquí podrías usar *ngFor="let product of products; let i = index" -->
         
-        <!-- Producto 1 -->
         <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow" *ngFor="let producto of productos">
           <div class="relative">
             <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent z-10 opacity-0 hover:opacity-100 transition-opacity"></div>
