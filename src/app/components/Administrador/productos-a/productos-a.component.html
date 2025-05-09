@@ -1,0 +1,283 @@
+<div class="min-h-screen bg-gradient-to-b from-rose-50 to-white">
+    <main class="container mx-auto py-10 px-4">
+      <h1 class="text-4xl font-bold mb-2 text-center text-rose-700">Sistema de Inventario</h1>
+      <p class="text-center text-gray-600 mb-10">Gestiona tu inventario de manera eficiente y organizada</p>
+      
+      <p-card styleClass="w-full max-w-4xl mx-auto shadow-lg border-rose-100 overflow-hidden">
+        <ng-template pTemplate="header">
+          <div class="bg-gradient-to-r from-rose-600 to-rose-500 p-6 text-white">
+            <div class="flex items-center gap-3">
+              <i class="pi pi-box text-3xl"></i>
+              <div>
+                <h2 class="text-2xl font-bold">Registro de Producto Nuevo</h2>
+                <p class="text-rose-100">Ingresa los detalles del producto que deseas agregar al inventario</p>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+  
+        <form [formGroup]="formularioProducto">
+          <div class="p-6 pt-8 space-y-8">
+            <div>
+              <div class="flex items-center gap-2 mb-4">
+                <i class="pi pi-pencil text-rose-500"></i>
+                <h3 class="text-lg font-medium">Información Básica</h3>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                  <label for="nombre_producto" class="flex items-center gap-1">
+                    Nombre del Producto <span class="text-rose-500">*</span>
+                  </label>
+                  <span class="p-input-icon-left w-full">
+                    <i class="pi pi-pencil text-gray-400"></i>
+                    <input 
+                      pInputText 
+                      id="nombre_producto" 
+                      formControlName="nombre_producto" 
+                      placeholder="Ej: Laptop HP Pavilion" 
+                      class="w-full"
+                    />
+                  </span>
+                  <small 
+                    *ngIf="formularioProducto.get('nombre_producto')?.invalid && formularioProducto.get('nombre_producto')?.touched" 
+                    class="text-sm text-red-500 flex items-center gap-1"
+                  >
+                    <i class="pi pi-times-circle"></i>
+                    El nombre del producto es requerido
+                  </small>
+                </div>
+  
+                <div class="space-y-2">
+                  <label for="categoria_id" class="flex items-center gap-1">
+                    Categoría <span class="text-rose-500">*</span>
+                  </label>
+                  <p-select 
+                    formControlName="categoria_id" 
+                    [options]="categorias" 
+                    optionLabel="nombre" 
+                    optionValue="id" 
+                    placeholder="Seleccionar categoría"
+                    styleClass="w-full"
+                  ></p-select>
+                  <small 
+                    *ngIf="formularioProducto.get('categoria_id')?.invalid && formularioProducto.get('categoria_id')?.touched" 
+                    class="text-sm text-red-500 flex items-center gap-1"
+                  >
+                    <i class="pi pi-times-circle"></i>
+                    La categoría es requerida
+                  </small>
+                </div>
+              </div>
+            </div>
+  
+            <div class="border-t border-gray-200 my-4"></div>
+  
+            <!-- Sección de descripción -->
+            <div>
+              <div class="flex items-center gap-2 mb-4">
+                <i class="pi pi-file-edit text-rose-500"></i>
+                <h3 class="text-lg font-medium">Descripción del Producto</h3>
+              </div>
+              <div class="space-y-2">
+                <label for="descripcion_producto" class="flex items-center gap-1">
+                  Descripción Detallada <span class="text-rose-500">*</span>
+                </label>
+
+                <textarea 
+                pTextarea 
+                formControlName="descripcion_producto"
+                rows="5" cols="30" pSize="large" 
+                class="w-full"
+                >
+
+                </textarea>
+               
+                <small 
+                  *ngIf="formularioProducto.get('descripcion_producto')?.invalid && formularioProducto.get('descripcion_producto')?.touched" 
+                  class="text-sm text-red-500 flex items-center gap-1"
+                >
+                  <i class="pi pi-times-circle"></i>
+                  La descripción del producto es requerida
+                </small>
+              </div>
+            </div>
+  
+            <div class="border-t border-gray-200 my-4"></div>
+  
+            <!-- Sección de precios y stock -->
+            <div>
+              <div class="flex items-center gap-2 mb-4">
+                <i class="pi pi-dollar text-rose-500"></i>
+                <h3 class="text-lg font-medium">Precio y Stock</h3>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2">
+                  <label for="precio_producto" class="flex items-center gap-1">
+                    Precio <span class="text-rose-500">*</span>
+                  </label>
+                  <span class="p-input-icon-left w-full">
+                    <i class="pi pi-dollar text-gray-400"></i>
+                    <p-inputNumber 
+                      formControlName="precio_producto" 
+                      mode="decimal" 
+                      [minFractionDigits]="2" 
+                      [maxFractionDigits]="2" 
+                      placeholder="0.00"
+                      styleClass="w-full"
+                    ></p-inputNumber>
+                  </span>
+                  <small 
+                    *ngIf="formularioProducto.get('precio_producto')?.invalid && formularioProducto.get('precio_producto')?.touched" 
+                    class="text-sm text-red-500 flex items-center gap-1"
+                  >
+                    <i class="pi pi-times-circle"></i>
+                    El precio es requerido
+                  </small>
+                </div>
+  
+                <div class="space-y-2">
+                  <label for="stock" class="flex items-center gap-1">
+                    Cantidad en Stock <span class="text-rose-500">*</span>
+                  </label>
+                  <span class="p-input-icon-left w-full">
+                    <i class="pi pi-chart-bar text-gray-400"></i>
+                    <p-inputNumber 
+                      formControlName="stock" 
+                      [showButtons]="true" 
+                      [min]="0" 
+                      placeholder="0"
+                      styleClass="w-full"
+                    ></p-inputNumber>
+                  </span>
+                  <small 
+                    *ngIf="formularioProducto.get('stock')?.invalid && formularioProducto.get('stock')?.touched" 
+                    class="text-sm text-red-500 flex items-center gap-1"
+                  >
+                    <i class="pi pi-times-circle"></i>
+                    El stock es requerido
+                  </small>
+                </div>
+              </div>
+            </div>
+  
+            <div class="border-t border-gray-200 my-4"></div>
+  
+            <!-- Sección de imagen -->
+            <div>
+              <div class="flex items-center gap-2 mb-4">
+                <i class="pi pi-image text-rose-500"></i>
+                <h3 class="text-lg font-medium">Imagen del Producto</h3>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                <div class="space-y-4">
+                  <div class="flex items-center gap-2">
+                    <p-button 
+                      styleClass="p-button-outlined border-rose-200 hover:bg-rose-50 hover:text-rose-600" 
+                      icon="pi pi-upload" 
+                      label="Subir Imagen"
+                      (click)="fileInput.click()"
+                    ></p-button>
+                    <input 
+                      #fileInput 
+                      type="file" 
+                      (change)="obtenerImagen($event)" 
+                      accept="image/*" 
+                      style="display: none"
+                    />
+                  </div>
+                  <div class="bg-rose-50 rounded-lg p-3 text-sm text-rose-700">
+                    <p class="font-medium mb-1">Recomendaciones:</p>
+                    <ul class="list-disc pl-5 space-y-1 text-xs">
+                      <li>Formatos aceptados: JPG, PNG</li>
+                      <li>Tamaño máximo: 5MB</li>
+                      <li>Resolución recomendada: 1200x1200px</li>
+                      <li>Fondo blanco para mejor visualización</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flex justify-center">
+                  <div *ngIf="imagen_preview; else noImage" class="relative">
+                    <img 
+                      [src]="imagen_preview" 
+                      alt="Vista previa" 
+                      class="h-48 w-48 object-cover border rounded-lg shadow-md"
+                    />
+                    <button 
+                      type="button" 
+                      class="absolute -top-2 -right-2 h-6 w-6 rounded-full bg-red-500 text-white flex items-center justify-center"
+                      (click)="imagen_preview = null; imagen_producto = null"
+                    >
+                      <i class="pi pi-times text-xs"></i>
+                    </button>
+                  </div>
+                  <ng-template #noImage>
+                    <div class="h-48 w-48 border-2 border-dashed border-gray-300 rounded-lg flex flex-col items-center justify-center bg-gray-50">
+                      <i class="pi pi-image text-5xl text-gray-300 mb-2"></i>
+                      <p class="text-xs text-gray-500 text-center px-2">Vista previa de imagen</p>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Mensajes de éxito o error -->
+          <div *ngIf="mensajeExito" class="mx-6 mb-4">
+            <p-message severity="success" [text]="mensajeExito"></p-message>
+          </div>
+          <div *ngIf="mensajeError" class="mx-6 mb-4">
+            <p-message severity="error" [text]="mensajeError"></p-message>
+          </div>
+  
+          <!-- Botones de acción -->
+          <div class="bg-gray-50 p-6 border-t border-gray-100">
+            <div class="flex flex-col sm:flex-row justify-between gap-3">
+              <p-button 
+                styleClass="p-button-outlined border-gray-300 hover:bg-gray-100" 
+                icon="pi pi-times" 
+                label="Regresar"
+                (onClick)="rutaDashboard()"
+              ></p-button>
+              <p-button 
+                styleClass="p-button bg-rose-600 hover:bg-rose-700 text-white" 
+                icon="pi pi-check" 
+                label="Guardar Producto"
+                [loading]="estaCargando"
+                (click)="validarFormData(); alertaModal()"
+              ></p-button>
+            </div>
+          </div>
+        </form>
+      </p-card>
+  
+      <!-- Modal de confirmación -->
+      <p-dialog 
+        [(visible)]="mostrarModal" 
+        header="Confirmar registro" 
+        [modal]="true" 
+        [style]="{width: '400px'}"
+        [draggable]="false" 
+        [resizable]="false"
+      >
+        <p class="m-0">¿Estás seguro de que deseas registrar este producto?</p>
+        <ng-template pTemplate="footer">
+          <p-button 
+            icon="pi pi-times" 
+            label="No" 
+            styleClass="p-button-text" 
+            (click)="mostrarModal = false"
+          ></p-button>
+          <p-button 
+            icon="pi pi-check" 
+            label="Sí" 
+            (click)="confirmarModal()"
+          ></p-button>
+        </ng-template>
+      </p-dialog>
+  
+      <!-- Spinner de carga -->
+      <div *ngIf="estaCargando" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <p-progressSpinner styleClass="w-16 h-16"></p-progressSpinner>
+      </div>
+    </main>
+  </div>

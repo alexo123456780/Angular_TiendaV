@@ -1,3 +1,5 @@
+import { Producto } from "./Producto"
+
 export interface Tienda
 {
     id:number,
@@ -9,6 +11,8 @@ export interface Tienda
     direccion:string,
     created_at:string,
     updated_at:string
+    productos:Producto[]
+
 }
 
 export interface TiendaResponse
@@ -20,6 +24,17 @@ export interface TiendaResponse
 
 }
 
+
+export interface TiendaProductosResponse{
+
+    status:boolean,
+    message:string,
+    data:Producto[],
+    code:number,
+}
+
+
+
 export interface TiendaListaResponse
 {
     status:boolean,
@@ -27,3 +42,15 @@ export interface TiendaListaResponse
     data:Tienda[],
     code:number
 }
+
+
+export interface TiendaVentas{
+
+    status:boolean,
+    message:string,
+    numero_ventas:number,
+    code:number
+
+}
+
+

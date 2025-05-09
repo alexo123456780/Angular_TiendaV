@@ -5,6 +5,7 @@ import { map } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AdministradorResponse } from '../interfaces/Administrador';
 import { AdministradorCredenciales } from '../interfaces/Administrador';
+import { PasswordNuevo } from '../interfaces/Administrador';
 
 
 @Injectable({
@@ -104,6 +105,39 @@ export class AdminServiceService {
     return null;
 
   }
+
+
+  editarPerfilAdmin(datos:FormData, id_admin:number):Observable<AdministradorResponse>{
+
+    return this.http.post<AdministradorResponse>(`${this.apiUrl}/actualizar_info/${id_admin}`,datos).pipe(
+
+      map(response =>{
+
+        console.log(JSON.stringify({status:response.status,message:response.message,code:response.code},null,3));
+
+        return response;
+
+      })
+    )
+  }
+
+  cambiarPasswordAdmin(password:PasswordNuevo, id_admin:number):Observable<AdministradorResponse>{
+
+    return this.http.put<AdministradorResponse>(`${this.apiUrl}/actualizar_password_admin/${id_admin}`,password).pipe(
+
+      map(response =>{
+
+        console.log(JSON.stringify({status:response.status,message:response.message,code:response.code},null,3));
+
+        return response;
+        
+      })
+    )
+
+  }
+
+
+  
 
 
 

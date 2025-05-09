@@ -31,5 +31,13 @@ export interface UsuarioCredenciales
 
 }
 
+export interface UsuarioListaResponse
+{
+    status:boolean,
+    message:string,
+    data: Usuario[],
+    code:number
+}
+
 
 

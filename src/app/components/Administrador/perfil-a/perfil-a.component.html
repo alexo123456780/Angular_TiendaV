@@ -1,0 +1,75 @@
+<div class="bg-gray-50 min-h-screen flex items-center justify-center p-6">
+    <div class="w-full max-w-7xl">
+      <div class="bg-white rounded-xl shadow-xl overflow-hidden border-0">
+        <div class="flex flex-col md:flex-row">
+          <div class="bg-gray-50 p-10 flex flex-col items-center justify-center md:w-1/3">
+            <div class="relative mb-8">
+              <div class="absolute -inset-1.5 rounded-full bg-gradient-to-r from-gray-200 to-gray-300 opacity-75 blur-sm"></div>
+              <div class="relative h-48 w-48 rounded-full border-4 border-white shadow-md bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center overflow-hidden">
+                <img *ngIf="administrador?.perfil" [src]="administrador?.perfil" alt="foto_admin" class="h-full w-full object-cover">
+                <div *ngIf="!administrador?.perfil" class="absolute inset-0 flex items-center justify-center text-white text-5xl font-semibold">
+                  Administrador
+                </div>
+              </div>
+            </div>
+  
+            <h1 class="text-3xl font-bold text-gray-800 text-center">{{ administrador?.nombre_administrador }}</h1>
+            <p class="text-lg text-gray-500 mb-3">{{administrador?.email}}</p>
+  
+            <div class="flex items-center text-gray-600 mt-3">
+              <i class="ri-briefcase-line mr-3 text-xl text-gray-400"></i>
+              <span class="text-lg"> Tienda : {{ administrador?.tienda?.nombre_tienda }}</span>
+            </div>
+  
+            <button class="mt-10 w-full py-7 bg-gray-800 text-white text-lg rounded-md flex items-center justify-center gap-3 hover:bg-gray-700 transition-colors" (click)="rutaActualizarPerfil()">
+              <i class="ri-edit-line text-xl"></i>
+              Editar Perfil
+            </button>
+          </div>
+  
+          <div class="flex-1 p-10">
+            <div class="space-y-8">
+              <div>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-5">Información Personal</h2>
+                <div class="bg-gray-50 p-8 rounded-lg">
+                  <p class="text-xl text-gray-600">
+                    {{ administrador?.nombre_administrador }} {{administrador?.apellido_paterno}} {{administrador?.apellido_materno}}
+                  </p>
+                </div>
+              </div>
+  
+              <div>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-5">Información de Contacto</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                  <div class="flex items-center bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
+                    <i class="ri-mail-line text-gray-400 text-2xl mr-4"></i>
+                    <div>
+                      <p class="text-sm text-gray-500">Email</p>
+                      <p class="text-base font-medium text-gray-700">{{ administrador?.email }}</p>
+                    </div>
+                  </div>
+  
+                  <div class="flex items-center bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
+                    <i class="ri-phone-line text-gray-400 text-2xl mr-4"></i>
+                    <div>
+                      <p class="text-sm text-gray-500">Teléfono</p>
+                      <p class="text-base font-medium text-gray-700">{{ administrador?.numero_telefonico }}</p>
+                    </div>
+                  </div>
+  
+                  <div class="flex items-center bg-white p-6 rounded-lg border border-gray-100 shadow-sm">
+                    <i class="ri-calendar-line text-gray-400 text-2xl mr-4"></i>
+                    <div>
+                      <p class="text-sm text-gray-500">Miembro desde</p>
+                      <p class="text-base font-medium text-gray-700">{{ administrador?.created_at| date:'dd / MMM / YYY' }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

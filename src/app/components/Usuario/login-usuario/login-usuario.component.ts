@@ -85,12 +85,12 @@ export class LoginUsuarioComponent {
 
           this.mensajeExito = 'Login exitoso, redirigiendo al dashboard';
 
-          /*setTimeout(() =>{
+          setTimeout(() =>{
 
-            this.router.navigate(['/'])
+            this.router.navigate(['/dashboard/usuarios'])
 
 
-          },1400)*/
+          },1400)
 
           this.limpiarMensajes();
         },

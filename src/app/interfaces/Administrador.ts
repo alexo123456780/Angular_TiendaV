@@ -1,3 +1,5 @@
+import { Tienda } from "./Tienda"
+
 export interface Administrador
 {
     id:number,
@@ -11,6 +13,7 @@ export interface Administrador
     tienda_id:number,
     created_at:string,
     updated_at:string
+    tienda:Tienda,
 }
 
 
@@ -26,5 +29,10 @@ export interface AdministradorResponse
 export interface AdministradorCredenciales
 {
     email:string,
+    password:string
+}
+
+export interface PasswordNuevo
+{
     password:string
 }

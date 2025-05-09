@@ -1,99 +1,123 @@
 <div class="container-global">
-    <div class="form-container">
-      <div class="login-card">
-        <div class="card-header">
+  <div class="form-container">
+    <div class="login-card">
+      <div class="card-header">
+        <div class="icon-container">
           <i class="pi pi-user-circle"></i>
-          <h2 class="titulo">Login Usuario</h2>
-          <p class="parrafo">Logeate y vive la experiencia</p>
         </div>
-  
-        <form [formGroup]="formulario" (ngSubmit)="logearse()">
-          <!-- Fixed Email Input -->
-          <div class="form-field">
-            <div class="input-wrapper">
-              <i class="pi pi-envelope input-icon"></i>
-              <input 
-                pInputText 
-                formControlName="email" 
-                placeholder="Correo Electrónico" 
-                class="p-inputtext p-component full-width-input"
-              />
-            </div>
-  
-            <div class="validation-messages" *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched">
-              <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('email')?.errors?.['required']">
-                El Correo es requerido
-              </p-message>
-              <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('email')?.errors?.['email']">
-                Debes de ingresar una direccion de correo correcta
-              </p-message>
-            </div>
+        <h2 class="titulo">Bienvenido de nuevo</h2>
+        <p class="parrafo">Accede a tu cuenta para ver y comprar lo que gustes</p>
+      </div>
+
+      <form [formGroup]="formulario" (ngSubmit)="logearse()">
+        <div class="form-field">
+          <label class="field-label">Correo electrónico</label>
+          <div class="input-wrapper">
+            <i class="pi pi-envelope input-icon"></i>
+            <input 
+              pInputText 
+              formControlName="email" 
+              placeholder="Ejemplo: Joestar123@hotmail.com" 
+              class="p-inputtext p-component full-width-input"
+            />
           </div>
-  
-          <!-- Password Input -->
-          <div class="form-field">
-            <div class="input-wrapper">
-              <p-password 
-                formControlName="password" 
-                [toggleMask]="true" 
-                [feedback]="false"
-                placeholder="Password"
-                styleClass="full-width-input"
-              ></p-password>
-            </div>
-  
-            <div class="validation-messages" *ngIf="formulario.get('password')?.invalid && formulario.get('password')?.touched">
-              <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('password')?.errors?.['required']">
-                El Password es requerido
-              </p-message>
-              <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('password')?.errors?.['minlength']">
-                Ingresa minimo 4 caracteres
-              </p-message>
-              <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('password')?.errors?.['maxlength']">
-                Ingresa maximo 20 caracteres
-              </p-message>
-            </div>
+
+          <div class="validation-messages" *ngIf="formulario.get('email')?.invalid && formulario.get('email')?.touched">
+            <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('email')?.errors?.['required']">
+              El correo es requerido
+            </p-message>
+            <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('email')?.errors?.['email']">
+              Ingresa una dirección de correo válida
+            </p-message>
           </div>
-  
-          <div class="button-container">
-            <p-button 
-              type="submit" 
-              [disabled]="estaCargando || formulario.invalid" 
-              styleClass="login-button"
-              icon="pi pi-sign-in"
-              iconPos="right"
-              label="Login"
-            ></p-button>
-            
-            <div class="spinner-container" *ngIf="estaCargando">
-              <p-progressSpinner strokeWidth="8" fill="transparent" animationDuration=".5s" />
-            </div>
-          </div>
-        </form>
-  
-        <div class="message-container">
-          <p-message severity="success" icon="pi pi-check-circle" *ngIf="mensajeExito" [text]="mensajeExito"></p-message>
-          <p-message severity="error" icon="pi pi-times-circle" *ngIf="mensajeError" [text]="mensajeError"></p-message>
         </div>
-        
-        <div class="additional-options">
-          <a href="#" class="forgot-password">
-            <i class="pi pi-question-circle"></i>
+
+        <div class="form-field">
+          <label class="field-label">Contraseña</label>
+          <div class="input-wrapper">
+            <p-password 
+              formControlName="password" 
+              [toggleMask]="true" 
+              [feedback]="false"
+              placeholder="Ejemplo: (minimo 4 caracteres)"
+              styleClass="full-width-input "
+            ></p-password>
+          </div>
+
+          <div class="validation-messages" *ngIf="formulario.get('password')?.invalid && formulario.get('password')?.touched">
+            <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('password')?.errors?.['required']">
+              La contraseña es requerida
+            </p-message>
+            <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('password')?.errors?.['minlength']">
+              Mínimo 4 caracteres
+            </p-message>
+            <p-message severity="error" icon="pi pi-exclamation-circle" *ngIf="formulario.get('password')?.errors?.['maxlength']">
+              Máximo 20 caracteres
+            </p-message>
+          </div>
+        </div>
+
+        <div class="remember-forgot">
+          <div class="remember-me">
+          </div>
+          <a href="#" class="forgot-link">
             ¿Olvidaste tu contraseña?
           </a>
-          <a routerLink="/registro/usuario" class="create-account">
-            <i class="pi pi-user-plus"></i>
-            Crear cuenta
-          </a>
         </div>
+
+        <div class="button-container">
+          <p-button 
+            type="submit" 
+            [disabled]="estaCargando || formulario.invalid" 
+            styleClass="login-button"
+            icon="pi pi-sign-in"
+            iconPos="right"
+            label="Iniciar sesión"
+          ></p-button>
+          
+          <div class="spinner-container" *ngIf="estaCargando">
+            <p-progressSpinner strokeWidth="8" fill="transparent" animationDuration=".5s" />
+          </div>
+        </div>
+      </form>
+
+      <div class="message-container">
+        <p-message severity="success" icon="pi pi-check-circle" *ngIf="mensajeExito" [text]="mensajeExito"></p-message>
+        <p-message severity="error" icon="pi pi-times-circle" *ngIf="mensajeError" [text]="mensajeError"></p-message>
       </div>
-    </div>
-  
-    <div class="banner-container">
-      <div class="banner-content">
-        <i class="pi pi-shield" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-        <h1>Bienvenido de vuelta</h1>
-        <p>Accede a tu cuenta para disfrutar de todos nuestros servicios</p>
+      
+      <div class="additional-options">
+        <p class="no-account">¿No tienes una cuenta?</p>
+        <a routerLink="/registro/usuario" class="create-account">
+          Crea una nueva cuenta
+          <i class="pi pi-arrow-right"></i>
+        </a>
       </div>
     </div>
   </div>
+
+  <div class="banner-container">
+    <div class="banner-content">
+      <div class="banner-logo">
+        <i class="pi pi-shield"></i>
+      </div>
+      <h1>MMTK2</h1>
+      <p>Compra y ve articulos que son de tu agrado</p>
+      
+      <div class="feature-list">
+        <div class="feature-item">
+          <i class="pi pi-chart-line"></i>
+          <span>Ventas Seguras</span>
+        </div>
+        <div class="feature-item">
+          <i class="pi pi-shopping-cart"></i>
+          <span>Tiendas de calidad</span>
+        </div>
+        <div class="feature-item">
+          <i class="pi pi-users"></i>
+          <span>Ven y vive la experiencia al maximo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs';
 import { UsuarioResponse } from '../interfaces/Usuario';
 import { UsuarioCredenciales } from '../interfaces/Usuario';
+import { UsuarioListaResponse } from '../interfaces/Usuario';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -64,6 +65,25 @@ export class UsuarioServiceService {
       })
     )
   }
+
+
+  verUsuarios():Observable<UsuarioListaResponse>{
+
+    return this.http.get<UsuarioListaResponse>(`${this.apiUrl}/ver_usuarios`).pipe(
+
+      map(response =>{
+
+        console.log(JSON.stringify({status:response.status, message:response.message, code: response.code},null,3));
+
+        return response;
+
+      })
+    )
+  }
+
+
+
+
 
 
 

@@ -1,29 +1,41 @@
 <!-- Dashboard principal -->
-<div class="flex min-h-screen flex-col">
+<div class="flex min-h-screen flex-col bg-gradient-to-br from-gray-50 to-gray-100">
+  <!-- Efecto de fondo decorativo -->
+  <div class="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-br from-blue-100/30 to-indigo-200/30 rounded-bl-full -z-10 blur-3xl"></div>
+  <div class="absolute bottom-0 left-0 w-1/4 h-1/4 bg-gradient-to-tr from-purple-100/20 to-pink-200/20 rounded-tr-full -z-10 blur-3xl"></div>
     <!-- Header -->
-    <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div class="flex h-16 items-center px-4">
+    <header class="sticky top-0 z-50 w-full border-b bg-white shadow-sm backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div class="flex h-16 items-center px-6">
         <button pButton icon="pi pi-bars" class="p-button-text md:hidden"></button>
         
         <!-- Logo -->
         <a href="/" class="flex items-center gap-2 ml-2 md:ml-0">
-          <i class="pi pi-box text-xl"></i>
-          <span class="font-bold hidden md:inline-block">TiendaAdmin</span>
+          <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-2 rounded-lg shadow-md">
+            <i class="pi pi-box text-xl text-white"></i>
+          </div>
+          <span class="font-bold hidden md:inline-block text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-700 text-lg">TiendaAdmin</span>
         </a>
         
         <!-- Elementos derecha -->
         <div class="flex items-center ml-auto space-x-4">
           <!-- Búsqueda -->
           <div class="relative hidden md:flex">
-            <input type="search" pInputText placeholder="Buscar..." class="w-[200px] lg:w-[300px] pl-8" />
+            <span class="p-input-icon-left w-full">
+              <i class="pi pi-search text-gray-400"></i>
+              <input type="search" pInputText placeholder="Buscar..." class="w-[200px] lg:w-[300px] rounded-full border-gray-200 shadow-sm transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
+            </span>
           </div>
           
           <!-- Notificaciones -->
-          <button pButton icon="pi pi-bell" class="p-button-text"></button>
+          <button pButton icon="pi pi-bell" class="p-button-rounded p-button-text p-button-raised hover:shadow-md transition-all duration-200" pBadge value="5" severity="danger"></button>
           
-          <!-- Avatar usuario -->
+          <!-- Avatar usuario con menú desplegable -->
           <div class="relative">
-            <p-avatar image="{{administrador?.perfil}}" shape="circle" size="large" styleClass="cursor-pointer" [style]="{'width': '32px', 'height': '32px'}" *ngIf="administrador?.perfil"></p-avatar>
+            <p-avatar #avatarBtn image="{{administrador?.perfil}}" shape="circle" size="large" styleClass="cursor-pointer border-2 border-white shadow-sm hover:shadow-md transition-all duration-200" [style]="{'width': '40px', 'height': '40px'}" *ngIf="administrador?.perfil" (click)="menu.toggle($event)"></p-avatar>
+            <span class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-green-500 border-2 border-white"></span>
+            
+            <!-- Menú desplegable -->
+            <p-menu #menu [popup]="true" [model]="opcionesMenu" styleClass="shadow-lg rounded-lg overflow-hidden border-0 w-48" [baseZIndex]="1000" [autoZIndex]="true" [showTransitionOptions]="'0ms'" [hideTransitionOptions]="'0ms'" appendTo="body"></p-menu>
           </div>
         </div>
       </div>
@@ -31,36 +43,36 @@
   
     <div class="flex flex-1">
       <!-- Sidebar navegación -->
-      <nav class="w-64 hidden md:block space-y-1 px-4 py-4 border-r">
-        <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium bg-accent text-accent-foreground">
+      <nav class="w-64 hidden md:block space-y-1 px-4 py-6 border-r bg-white shadow-inner">
+        <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md transition-all duration-200 hover:shadow-lg">
           <i class="pi pi-home mr-2"></i>
           Dashboard
         </a>
-        <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+        <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200">
           <i class="pi pi-box mr-2"></i>
           Productos
         </a>
-        <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+        <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200">
           <i class="pi pi-shopping-cart mr-2"></i>
           Pedidos
         </a>
-        <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+        <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200">
           <i class="pi pi-users mr-2"></i>
           Clientes
         </a>
-        <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+        <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200">
           <i class="pi pi-tag mr-2"></i>
           Categorías
         </a>
-        <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+        <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200">
           <i class="pi pi-chart-bar mr-2"></i>
           Estadísticas
         </a>
-        <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+        <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200">
           <i class="pi pi-comments mr-2"></i>
           Mensajes
         </a>
-        <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+        <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200">
           <i class="pi pi-cog mr-2"></i>
           Configuración
         </a>
@@ -71,65 +83,104 @@
         <!-- Encabezado página -->
         <div class="flex items-center justify-between py-6">
           <div>
-            <h1 class="text-3xl font-bold tracking-tight">Dashboard</h1>
-            <p class="text-muted-foreground">Bienvenido de nuevo, administrador</p>
+            <h1 class="text-3xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-gray-800 to-gray-600">Menu Principal</h1>
+            <p class="text-gray-500" *ngIf="administrador?.nombre_administrador">Bienvenido de nuevo, <span class="font-medium text-blue-600">{{administrador?.nombre_administrador}}</span></p>
           </div>
           <div class="flex items-center gap-2">
-            <button pButton icon="pi pi-box" label="Añadir producto" class="p-button-primary"></button>
+            <button pButton icon="pi pi-box" label="Añadir producto" class="p-button-primary bg-gradient-to-r from-blue-500 to-indigo-600 border-0 shadow-md hover:shadow-lg transition-all duration-200" (click)="rutaProductos()" ></button>
           </div>
         </div>
   
         <!-- Tabs -->
-        <p-tabView>
+        <p-tabView styleClass="custom-tabs shadow-md rounded-xl overflow-hidden bg-white">
+          <ng-template pTemplate="header" class="header-template">
+          </ng-template>
           <!-- Tab Overview -->
           <p-tabPanel header="Resumen">
             <!-- Tarjetas estadísticas -->
-            <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
               <!-- Tarjeta 1 -->
-              <div class="border rounded-lg shadow-md">
-                <div class="flex flex-row items-center justify-between space-y-0 p-4 pb-2">
-                  <h3 class="text-sm font-medium">Ingresos totales</h3>
-                  <i class="pi pi-dollar text-muted-foreground"></i>
+              <div class="border-0 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden relative group">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-blue-500"></div>
+                <div class="flex flex-row items-center justify-between space-y-0 p-5 pb-2">
+                  <h3 class="text-sm font-medium text-gray-700">Ingresos totales</h3>
+                  <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center group-hover:bg-blue-100 transition-all duration-300">
+                    <i class="pi pi-dollar text-blue-500"></i>
+                  </div>
                 </div>
-                <div class="p-4 pt-0">
-                  <div class="text-2xl font-bold">$45,231.89</div>
-                  <p class="text-xs text-muted-foreground">+20.1% respecto al mes pasado</p>
+                <div class="p-5 pt-0">
+                  <div class="text-3xl font-bold text-gray-800">$45,231.89</div>
+                  <p class="text-xs text-green-500 font-medium flex items-center mt-1">
+                    <i class="pi pi-arrow-up mr-1"></i>
+                    +20.1% respecto al mes pasado
+                  </p>
+                  <div class="mt-3 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-green-400 to-blue-500 rounded-full" style="width: 75%"></div>
+                  </div>
                 </div>
               </div>
   
               <!-- Tarjeta 2 -->
-              <div class="border rounded-lg shadow-md">
-                <div class="flex flex-row items-center justify-between space-y-0 p-4 pb-2">
-                  <h3 class="text-sm font-medium">Ventas</h3>
-                  <i class="pi pi-credit-card text-muted-foreground"></i>
+              <div class="border-0 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden relative group">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-pink-500"></div>
+                <div class="flex flex-row items-center justify-between space-y-0 p-5 pb-2">
+                  <h3 class="text-sm font-medium text-gray-700">Ventas</h3>
+                  <div class="w-10 h-10 rounded-full bg-purple-50 flex items-center justify-center group-hover:bg-purple-100 transition-all duration-300">
+                    <i class="pi pi-credit-card text-purple-500"></i>
+                  </div>
                 </div>
-                <div class="p-4 pt-0">
-                  <div class="text-2xl font-bold">+2350</div>
-                  <p class="text-xs text-muted-foreground">+12.2% respecto al mes pasado</p>
+                <div class="p-5 pt-0">
+                  <div class="text-3xl font-bold text-gray-800" *ngIf="cantidad_ventas">{{cantidad_ventas}}</div>
+                  <div class="text-3xl font-bold text-gray-800" *ngIf="cantidad_ventas === 0">0</div>
+                  <p class="text-xs text-purple-500 font-medium flex items-center mt-1">
+                    <i class="pi pi-arrow-up mr-1"></i>
+                    Ventas del momento
+                  </p>
+                  <div class="mt-3 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-purple-400 to-pink-500 rounded-full" style="width: 65%"></div>
+                  </div>
                 </div>
               </div>
   
               <!-- Tarjeta 3 -->
-              <div class="border rounded-lg shadow-md">
-                <div class="flex flex-row items-center justify-between space-y-0 p-4 pb-2">
-                  <h3 class="text-sm font-medium">Productos activos</h3>
-                  <i class="pi pi-box text-muted-foreground"></i>
+              <div class="border-0 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden relative group">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-amber-400 to-orange-500"></div>
+                <div class="flex flex-row items-center justify-between space-y-0 p-5 pb-2">
+                  <h3 class="text-sm font-medium text-gray-700">Productos activos</h3>
+                  <div class="w-10 h-10 rounded-full bg-amber-50 flex items-center justify-center group-hover:bg-amber-100 transition-all duration-300">
+                    <i class="pi pi-box text-amber-500"></i>
+                  </div>
                 </div>
-                <div class="p-4 pt-0">
-                  <div class="text-2xl font-bold">573</div>
-                  <p class="text-xs text-muted-foreground">+36 nuevos productos este mes</p>
+                <div class="p-5 pt-0">
+                  <div class="text-3xl font-bold text-gray-800" *ngIf="cantidad_productos">{{cantidad_productos}} </div>
+                  <p class="text-xs text-amber-500 font-medium flex items-center mt-1">
+                    <i class="pi pi-plus mr-1"></i>
+                    Productos
+                  </p>
+                  <div class="mt-3 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-amber-400 to-orange-500 rounded-full" style="width: 80%"></div>
+                  </div>
                 </div>
               </div>
   
               <!-- Tarjeta 4 -->
-              <div class="border rounded-lg shadow-md">
-                <div class="flex flex-row items-center justify-between space-y-0 p-4 pb-2">
-                  <h3 class="text-sm font-medium">Clientes activos</h3>
-                  <i class="pi pi-users text-muted-foreground"></i>
+              <div class="border-0 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden relative group">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-emerald-400 to-teal-500"></div>
+                <div class="flex flex-row items-center justify-between space-y-0 p-5 pb-2">
+                  <h3 class="text-sm font-medium text-gray-700">Clientes activos</h3>
+                  <div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center group-hover:bg-emerald-100 transition-all duration-300">
+                    <i class="pi pi-users text-emerald-500"></i>
+                  </div>
                 </div>
-                <div class="p-4 pt-0">
-                  <div class="text-2xl font-bold">+12,234</div>
-                  <p class="text-xs text-muted-foreground">+10.1% respecto al mes pasado</p>
+                <div class="p-5 pt-0">
+                  <div class="text-3xl font-bold text-gray-800" *ngIf="cantidad_usuarios">{{cantidad_usuarios}}</div>
+                  <p class="text-xs text-emerald-500 font-medium flex items-center mt-1">
+                    <i class="pi pi-arrow-up mr-1"></i>
+                    Clientes Activos 
+                  </p>
+                  <div class="mt-3 h-1 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div class="h-full bg-gradient-to-r from-emerald-400 to-teal-500 rounded-full" style="width: 70%"></div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -137,34 +188,42 @@
             <!-- Gráficos y ventas recientes -->
             <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7 mt-4">
               <!-- Gráfico -->
-              <div class="border rounded-lg shadow-md col-span-4">
-                <div class="p-4">
-                  <h3 class="font-medium">Resumen</h3>
+              <div class="border-0 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden col-span-4">
+                <div class="p-5 border-b">
+                  <div class="flex items-center justify-between">
+                    <h3 class="font-medium text-gray-800">Resumen de Ventas</h3>
+                    <div class="flex space-x-2">
+                      <button pButton pRipple type="button" label="Mes" class="p-button-sm p-button-outlined"></button>
+                      <button pButton pRipple type="button" label="Año" class="p-button-sm p-button-outlined"></button>
+                    </div>
+                  </div>
                 </div>
-                <div class="pl-2">
+                <div class="p-5">
                   <!-- Aquí iría el gráfico - Placeholder -->
-                  <div style="height: 350px;" class="bg-gray-50 flex items-center justify-center">
-                    <p class="text-muted-foreground">Gráfico de ventas mensuales</p>
+                  <div style="height: 350px;" class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg flex items-center justify-center">
+                    <div class="text-center">
+                      <i class="pi pi-chart-line text-4xl text-blue-400 mb-2"></i>
+                      <p class="text-gray-500">Gráfico de ventas mensuales</p>
+                    </div>
                   </div>
                 </div>
               </div>
   
               <!-- Ventas recientes -->
-              <div class="border rounded-lg shadow-md col-span-3">
-                <div class="p-4">
-                  <h3 class="font-medium">Ventas recientes</h3>
-                  <p class="text-sm text-muted-foreground">Realizaste 265 ventas este mes.</p>
+              <div class="border-0 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden col-span-3">
+                <div class="p-5 border-b">
+                  <h3 class="font-medium text-gray-800">Ventas recientes</h3>
+                  <p class="text-sm text-gray-500 mt-1">Realizaste <span class="font-semibold text-indigo-600">265</span> ventas este mes.</p>
                 </div>
                 <div class="p-4 pt-0">
                   <div class="space-y-8">
                     <!-- Venta 1 -->
-                    <div class="flex items-center">
-                      <p-avatar image="assets/placeholder.svg" shape="circle" size="large" [style]="{'width': '36px', 'height': '36px'}"></p-avatar>
+                    <div class="flex items-center p-3 hover:bg-gray-50 rounded-lg transition-all duration-200">
+                      <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 font-semibold">JD</div>
                       <div class="ml-4 space-y-1">
                         <p class="text-sm font-medium leading-none">Juan Díaz</p>
-                        <p class="text-sm text-muted-foreground">juan.diazemail.com</p>
                       </div>
-                      <div class="ml-auto font-medium">+$249.00</div>
+                      <div class="ml-auto font-medium text-green-600">+$249.00</div>
                     </div>
                     
                
@@ -177,137 +236,77 @@
   
           <!-- Tab Productos -->
           <p-tabPanel header="Productos">
-            <div class="border rounded-lg shadow-md">
-              <div class="flex flex-row items-center p-4">
-                <h3 class="font-medium">Productos</h3>
-                <button pButton icon="pi pi-box" label="Añadir producto" class="p-button-primary ml-auto" size="small"></button>
+            <div class="border-0 rounded-xl bg-white shadow-lg overflow-hidden">
+              <div class="flex flex-row items-center p-5 border-b">
+                <h3 class="font-medium text-gray-800">Productos</h3>
+                <button pButton icon="pi pi-box" label="Añadir producto" class="p-button-primary ml-auto bg-gradient-to-r from-blue-500 to-indigo-600 border-0 shadow-md hover:shadow-lg transition-all duration-200" size="small"></button>
               </div>
               <div class="p-4 pt-0">
                 <!-- Filtro -->
-                <div class="flex items-center py-4">
-                  <span class="p-input-icon-left max-w-sm">
-                    <i class="pi pi-search"></i>
-                    <input type="text" pInputText placeholder="Filtrar productos..." />
+                <div class="flex flex-col md:flex-row items-start md:items-center gap-4 py-4">
+                  <span class="p-input-icon-left max-w-sm w-full">
+                    <i class="pi pi-search text-gray-400"></i>
+                    <input type="text" pInputText placeholder="Filtrar productos..." class="w-full rounded-lg border-gray-200 shadow-sm transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent" />
                   </span>
+                  <div class="ml-auto flex space-x-2">
+                    <button pButton icon="pi pi-filter" label="Filtros" class="p-button-outlined"></button>
+                    <button pButton icon="pi pi-download" label="Exportar" class="p-button-outlined"></button>
+                  </div>
                 </div>
                 
                 <!-- Tabla -->
-                <p-table>
+                <p-table [value]="productos" styleClass="p-datatable-rounded p-datatable-hoverable-rows">
                   <ng-template pTemplate="header">
-                    <tr>
-                      <th style="width: 3rem">
+                    <tr class="bg-gray-50">
+                      <th style="width: 3rem" class="border-b border-gray-200">
                         <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
                       </th>
-                      <th>ID</th>
-                      <th>Producto</th>
-                      <th>Categoría</th>
-                      <th style="text-align: right">Precio</th>
-                      <th style="text-align: center">Stock</th>
-                      <th style="text-align: center">Estado</th>
-                      <th style="width: 5rem"></th>
+                      <th class="border-b border-gray-200 text-gray-700">ID</th>
+                      <th class="border-b border-gray-200 text-gray-700">Producto</th>
+                      <th class="border-b border-gray-200 text-gray-700">Categoría</th>
+                      <th style="text-align: right" class="border-b border-gray-200 text-gray-700">Precio</th>
+                      <th style="text-align: center" class="border-b border-gray-200 text-gray-700">Stock</th>
+                      <th style="text-align: center" class="border-b border-gray-200 text-gray-700">Estado</th>
+                      <th style="width: 5rem" class="border-b border-gray-200"></th>
                     </tr>
                   </ng-template>
-                  <ng-template pTemplate="body">
-                    <!-- Producto 1 -->
-                    <tr>
-                      <td>
-                        <p-tableCheckbox></p-tableCheckbox>
+                  <ng-template pTemplate="body" let-producto>
+                    <tr class="transition-all duration-200 hover:bg-blue-50">
+                      <td class="border-b border-gray-100">
+                        <p-tableCheckbox [value]="producto"></p-tableCheckbox>
                       </td>
-                      <td><span class="font-medium">PROD-001</span></td>
-                      <td>Camiseta Premium</td>
-                      <td>Ropa</td>
-                      <td style="text-align: right">€29.99</td>
-                      <td style="text-align: center">45</td>
-                      <td style="text-align: center">
-                        <p-tag severity="success" value="Activo"></p-tag>
+                      <td class="border-b border-gray-100"><span class="font-medium text-gray-800">{{producto?.id}}</span></td>
+                      <td class="border-b border-gray-100">
+                        <div class="flex items-center">
+                          <div class="w-8 h-8 rounded bg-gray-100 flex items-center justify-center mr-2">
+                            <i class="pi pi-box text-gray-500 text-xs"></i>
+                          </div>
+                          <span>{{producto?.nombre_producto}}</span>
+                        </div>
                       </td>
-                      <td>
-                        <button pButton type="button" icon="pi pi-ellipsis-h" class="p-button-text p-button-rounded"></button>
+                      <td class="border-b border-gray-100">{{producto?.categoria?.nombre}}</td>
+                      <td style="text-align: right" class="border-b border-gray-100 font-medium">${{producto?.precio_producto}}</td>
+                      <td style="text-align: center" class="border-b border-gray-100">{{producto?.stock}}</td>
+                      <td style="text-align: center" class="border-b border-gray-100">
+                        <p-tag severity="success" value="Activo" styleClass="rounded-full px-3" *ngIf="producto?.stock > 0"></p-tag>
+                        <p-tag severity="danger" value="Agotado" styleClass="rounded-full px-3" *ngIf="producto?.stock <= 0"></p-tag>
                       </td>
-                    </tr>
-                    
-                    <!-- Producto 2 -->
-                    <tr>
-                      <td>
-                        <p-tableCheckbox></p-tableCheckbox>
-                      </td>
-                      <td><span class="font-medium">PROD-002</span></td>
-                      <td>Zapatillas Deportivas</td>
-                      <td>Calzado</td>
-                      <td style="text-align: right">€89.99</td>
-                      <td style="text-align: center">23</td>
-                      <td style="text-align: center">
-                        <p-tag severity="success" value="Activo"></p-tag>
-                      </td>
-                      <td>
-                        <button pButton type="button" icon="pi pi-ellipsis-h" class="p-button-text p-button-rounded"></button>
+                      <td class="border-b border-gray-100">
+                        <button pButton type="button" icon="pi pi-ellipsis-h" class="p-button-text p-button-rounded hover:bg-blue-100"></button>
                       </td>
                     </tr>
                     
-                    <!-- Producto 3 -->
-                    <tr>
-                      <td>
-                        <p-tableCheckbox></p-tableCheckbox>
-                      </td>
-                      <td><span class="font-medium">PROD-003</span></td>
-                      <td>Reloj Inteligente</td>
-                      <td>Electrónica</td>
-                      <td style="text-align: right">€199.99</td>
-                      <td style="text-align: center">12</td>
-                      <td style="text-align: center">
-                        <p-tag severity="success" value="Activo"></p-tag>
-                      </td>
-                      <td>
-                        <button pButton type="button" icon="pi pi-ellipsis-h" class="p-button-text p-button-rounded"></button>
-                      </td>
-                    </tr>
-                    
-                    <!-- Producto 4 -->
-                    <tr>
-                      <td>
-                        <p-tableCheckbox></p-tableCheckbox>
-                      </td>
-                      <td><span class="font-medium">PROD-004</span></td>
-                      <td>Bolso de Cuero</td>
-                      <td>Accesorios</td>
-                      <td style="text-align: right">€149.99</td>
-                      <td style="text-align: center">8</td>
-                      <td style="text-align: center">
-                        <p-tag severity="success" value="Activo"></p-tag>
-                      </td>
-                      <td>
-                        <button pButton type="button" icon="pi pi-ellipsis-h" class="p-button-text p-button-rounded"></button>
-                      </td>
-                    </tr>
-                    
-                    <!-- Producto 5 -->
-                    <tr>
-                      <td>
-                        <p-tableCheckbox></p-tableCheckbox>
-                      </td>
-                      <td><span class="font-medium">PROD-005</span></td>
-                      <td>Auriculares Bluetooth</td>
-                      <td>Electrónica</td>
-                      <td style="text-align: right">€79.99</td>
-                      <td style="text-align: center">0</td>
-                      <td style="text-align: center">
-                        <p-tag severity="danger" value="Sin stock"></p-tag>
-                      </td>
-                      <td>
-                        <button pButton type="button" icon="pi pi-ellipsis-h" class="p-button-text p-button-rounded"></button>
-                      </td>
-                    </tr>
                   </ng-template>
                 </p-table>
                 
                 <!-- Paginación -->
-                <div class="flex items-center justify-end space-x-2 py-4">
-                  <div class="flex-1 text-sm text-muted-foreground">
-                    2 de 10 fila(s) seleccionada(s).
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between md:justify-end space-y-3 md:space-y-0 md:space-x-2 py-6">
+                  <div class="flex-1 text-sm text-gray-500">
+                    <span class="font-medium text-blue-600">2</span> de <span class="font-medium text-gray-700">10</span> fila(s) seleccionada(s).
                   </div>
                   <div class="space-x-2">
-                    <button pButton type="button" label="Anterior" class="p-button-outlined p-button-sm"></button>
-                    <button pButton type="button" label="Siguiente" class="p-button-outlined p-button-sm"></button>
+                    <button pButton type="button" icon="pi pi-chevron-left" label="Anterior" class="p-button-outlined p-button-sm rounded-full"></button>
+                    <button pButton type="button" icon="pi pi-chevron-right" iconPos="right" label="Siguiente" class="p-button-outlined p-button-sm rounded-full"></button>
                   </div>
                 </div>
               </div>
@@ -316,7 +315,7 @@
   
           <!-- Tab Pedidos -->
           <p-tabPanel header="Pedidos">
-            <div class="border rounded-lg shadow-md">
+            <div class="border-0 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
               <div class="p-4">
                 <h3 class="font-medium">Pedidos recientes</h3>
                 <p class="text-sm text-muted-foreground">Gestiona los pedidos de tu tienda.</p>
@@ -329,13 +328,69 @@
   
           <!-- Tab Clientes -->
           <p-tabPanel header="Clientes">
-            <div class="border rounded-lg shadow-md">
-              <div class="p-4">
-                <h3 class="font-medium">Clientes</h3>
-                <p class="text-sm text-muted-foreground">Gestiona los clientes de tu tienda.</p>
+            <div class="border-0 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden">
+              <div class="p-5 border-b">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <h3 class="font-medium text-gray-800">Clientes</h3>
+                    <p class="text-sm text-gray-500 mt-1">Gestiona los clientes de tu tienda.</p>
+                  </div>
+                  <div class="flex space-x-2">
+                    <button pButton icon="pi pi-user-plus" label="Nuevo cliente" class="p-button-outlined"></button>
+                    <button pButton icon="pi pi-filter" class="p-button-outlined p-button-rounded"></button>
+                  </div>
+                </div>
               </div>
-              <div class="p-4">
-                <p class="text-sm text-muted-foreground">Aquí se mostrarán los clientes.</p>
+              <div class="p-5">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <!-- Cliente 1 -->
+                  <div class="border border-gray-100 rounded-lg p-4 hover:shadow-md transition-all duration-200 bg-white">
+                    <div class="flex items-center">
+                      <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-semibold">JD</div>
+                      <div class="ml-4">
+                        <p class="font-medium">Juan Díaz</p>
+                      </div>
+                    </div>
+                    <div class="mt-3 pt-3 border-t border-gray-100">
+                      <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Pedidos:</span>
+                        <span class="font-medium">12</span>
+                      </div>
+                      <div class="flex justify-between text-sm mt-1">
+                        <span class="text-gray-500">Total gastado:</span>
+                        <span class="font-medium">€1,245.00</span>
+                      </div>
+                    </div>
+                    <div class="mt-3 flex justify-end space-x-2">
+                      <button pButton icon="pi pi-pencil" class="p-button-text p-button-rounded p-button-sm"></button>
+                      <button pButton icon="pi pi-trash" class="p-button-text p-button-rounded p-button-danger p-button-sm"></button>
+                    </div>
+                  </div>
+                  
+                  <!-- Cliente 2 -->
+                  <div class="border border-gray-100 rounded-lg p-4 hover:shadow-md transition-all duration-200 bg-white">
+                    <div class="flex items-center">
+                      <div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600 font-semibold">MR</div>
+                      <div class="ml-4">
+                        <p class="font-medium">María Rodríguez</p>
+                      </div>
+                    </div>
+                    <div class="mt-3 pt-3 border-t border-gray-100">
+                      <div class="flex justify-between text-sm">
+                        <span class="text-gray-500">Pedidos:</span>
+                        <span class="font-medium">8</span>
+                      </div>
+                      <div class="flex justify-between text-sm mt-1">
+                        <span class="text-gray-500">Total gastado:</span>
+                        <span class="font-medium">€876.50</span>
+                      </div>
+                    </div>
+                    <div class="mt-3 flex justify-end space-x-2">
+                      <button pButton icon="pi pi-pencil" class="p-button-text p-button-rounded p-button-sm"></button>
+                      <button pButton icon="pi pi-trash" class="p-button-text p-button-rounded p-button-danger p-button-sm"></button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </p-tabPanel>
@@ -346,66 +401,46 @@
   
   <!-- Sidebar móvil (oculto por defecto) -->
   <p-sidebar position="left" [showCloseIcon]="true" styleClass="p-sidebar-md">
-    <nav class="space-y-1 px-4 py-4">
-      <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium bg-accent text-accent-foreground">
+    <div class="flex items-center gap-2 mb-6 px-4 pt-4">
+      <div class="bg-gradient-to-r from-blue-500 to-indigo-600 p-2 rounded-lg shadow-md">
+        <i class="pi pi-box text-xl text-white"></i>
+      </div>
+      <span class="font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-700 text-lg">TiendaAdmin</span>
+    </div>
+    <nav class="space-y-2 px-4 py-2">
+      <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-md transition-all duration-200 hover:shadow-lg">
         <i class="pi pi-home mr-2"></i>
         Dashboard
       </a>
-      <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+      <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200">
         <i class="pi pi-box mr-2"></i>
         Productos
       </a>
-      <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+      <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200">
         <i class="pi pi-shopping-cart mr-2"></i>
         Pedidos
       </a>
-      <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+      <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200">
         <i class="pi pi-users mr-2"></i>
         Clientes
       </a>
-      <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+      <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200">
         <i class="pi pi-tag mr-2"></i>
         Categorías
       </a>
-      <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+      <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200">
         <i class="pi pi-chart-bar mr-2"></i>
         Estadísticas
       </a>
-      <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+      <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200">
         <i class="pi pi-comments mr-2"></i>
         Mensajes
       </a>
-      <a href="#" class="flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground">
+      <a href="#" class="flex items-center rounded-lg px-3 py-3 text-sm font-medium text-gray-700 hover:bg-gray-100 hover:text-blue-600 transition-all duration-200">
         <i class="pi pi-cog mr-2"></i>
         Configuración
       </a>
     </nav>
   </p-sidebar>
   
-  <!-- Menú usuario (oculto por defecto) -->
-  <p-menu [popup]="true" [model]="[
-    {
-      label: 'Admin',
-      items: [
-        {
-          label: 'Perfil',
-          icon: 'pi pi-user'
-        },
-        {
-          label: 'Facturación',
-          icon: 'pi pi-credit-card'
-        },
-        {
-          label: 'Configuración',
-          icon: 'pi pi-cog'
-        },
-        {
-          separator: true
-        },
-        {
-          label: 'Cerrar sesión',
-          icon: 'pi pi-sign-out'
-        }
-      ]
-    }
-  ]"></p-menu>
+  
